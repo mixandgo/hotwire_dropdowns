@@ -8,7 +8,7 @@
 
 <% if @year %>
 <div class="block mt-4">
-  ✅ The <%= "#{@year.year} #{@make.name} #{@model.name}" %> is a nice car.
+  ✅ The <strong><%= "#{@year.year} #{@make.name} #{@model.name}" %></strong> is a nice car.
   <div class="mt-4"><%= link_to "Pick another", root_path, class: "text-blue-600 underline" %></div>
 </div>
 <% end %>
