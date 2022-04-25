@@ -1,3 +1,4 @@
+# Data found here: https://github.com/abhionlyone/us-car-models-data
 require "csv"
 
 Dir.glob("#{Rails.root}/db/seed_data/*.csv") do |file|
