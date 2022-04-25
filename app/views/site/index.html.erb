@@ -1,0 +1,14 @@
+<div class="block">
+<%= form_tag root_path, method: :get do %>
+  <%= select_tag :make, options_from_collection_for_select(@makes, "id", "name", @make&.id), prompt: "- Please select -", onchange: "this.form.submit()" %>
+  <%= select_tag :model, options_from_collection_for_select(@models, "id", "name", @model&.id), prompt: "- Model -", onchange: "this.form.submit()" %>
+  <%= select_tag :year, options_from_collection_for_select(@years, "id", "year", @year&.id), prompt: "- Year -", onchange: "this.form.submit()" %>
+<% end %>
+</div>
+
+<% if @year %>
+<div class="block mt-4">
+  ✅ The <%= "#{@year.year} #{@make.name} #{@model.name}" %> is a nice car.
+  <div class="mt-4"><%= link_to "Pick another", root_path, class: "text-blue-600 underline" %></div>
+</div>
+<% end %>
