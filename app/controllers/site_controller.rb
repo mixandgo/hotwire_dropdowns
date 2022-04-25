@@ -7,6 +7,22 @@ class SiteController < ApplicationController
     @years = @model&.years || []
   end
 
+  def makes
+    render json: Make.all.to_json
+  end
+
+  def models
+    render json: [] and return unless @make
+
+    render json: @make.models.to_json
+  end
+
+  def years
+    render json: [] and return unless @model
+
+    render json: @model.years.to_json
+  end
+
   private
 
     def find_mmy
