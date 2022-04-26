@@ -1,12 +1,16 @@
-<div class="block">
-  <%= form_tag root_path, method: :get, data: { controller: "dropdown" } do %>
-    <%= select_tag :make, "", prompt: "- Please select -", data: { action: "change->dropdown#make" } %>
-    <%= select_tag :model, "", prompt: "- Model -", data: { action: "change->dropdown#model" } %>
-    <%= select_tag :year, "", prompt: "- Year -", data: { action: "change->dropdown#year" } %>
+<%= turbo_frame_tag "form" do %>
+  <%= form_tag root_path, method: :get, data: { controller: "dropdown", action: "change->dropdown#submit" } do %>
+    <%= select_tag :make, options_from_collection_for_select(@makes, "id", "name", @make&.id), prompt: "- Please select -" %>
+    <%= select_tag :model, options_from_collection_for_select(@models, "id", "name", @model&.id), prompt: "- Model -" %>
+    <%= select_tag :year, options_from_collection_for_select(@years, "id", "year", @year&.id), prompt: "- Year -" %>
   <% end %>
-</div>
 
-<div class="block mt-4 hidden" id="message-container">
-  ✅ The <strong id="message"></strong> is a nice car.
-  <div class="mt-4"><%= link_to "Pick another", root_path, class: "text-blue-600 underline" %></div>
-</div>
+  <% if @year %>
+    <div class="mt-4">
+      <span class="inline-block mr-2">✅</span>
+      The <strong><%= "#{@year.year} #{@make.name} #{@model.name}" %></strong> is a nice car.
+      <div class="mt-4"><%= link_to "Pick another", root_path, class: "text-blue-600 underline", data: { turbo_frame: "_top" } %></div>
+    </div>
+  <% end %>
+<% end %>
+
